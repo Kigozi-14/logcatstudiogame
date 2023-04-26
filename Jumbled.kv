@@ -4,31 +4,37 @@
     transition: NoTransition()
 
 <HomeScreen>:
-    MDFloatingActionButton:
-        icon: 'cog'
-        pos_hint: {'center_x': .5, 'center_y': .9}
-        size_hint_x: .2
-        size_hint_y: .06
+    Image:
+        source: 'imags/home.JPG'
+        allow_stretch: True
+        keep_ratio: False
+    # MDFloatingActionButton:
+    #     icon: 'cog'
+    #     pos_hint: {'center_x': .5, 'center_y': .9}
+    #     size_hint_x: .2
+    #     size_hint_y: .06
 
-    MDLabel:
-        text: 'JUMBLED STORY'
-        pos_hint: {'center_x': .75, 'center_y': .78}
-
-    MDRoundFlatButton:
+    Button:
         text: 'PLAY'
-        pos_hint: {'center_x': .5, 'center_y': .3}
-        size_hint_x: .3
-        size_hint_y: .06
+        font_size: '22'
+        font_name: "Dyna"
+        pos_hint: {'center_x': .5, 'center_y': .17}
+        size_hint_x: .4
+        size_hint_y: .13
+        background_color:  253/255, 218/255, 13/255, 1
+        color:  246/255, 200/255, 0/255, 1
         on_release:
             app.home_to_playing()
 
 
-
+# 255    234  0
+# 253    218  13
+# 255    255  143
 
 <PlayingScreen>:
     canvas.before:
         Color:
-            rgba: 0, .0, .2, 3
+            rgba: 0, .0, .3, 3
         Rectangle:
             pos: self.pos
             size: self.size
@@ -55,7 +61,7 @@
             MDRoundFlatButton:
                 id: levo
                 text: str(root.value)
-                font_name: "Comic"
+                font_name: "Caveat"
                 # font_size: 13
                 size_hint: None, .9
                 pos_hint: {'right': 1}
@@ -77,27 +83,27 @@
             padding: 3
             Button:
                 id: input_one
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Dyna"
+                font_size: '18'
                 background_color: 246/255, 250/255, 5/255, 1
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 id: input_two
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Dyna"
+                font_size: '18'
                 background_color: 246/255, 250/255, 5/255, 1
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 id: input_three
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Dyna"
+                font_size: '18'
                 background_color: 246/255, 250/255, 5/255, 1
 
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 id: input_four
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Dyna"
+                font_size: '18'
                 background_color: 246/255, 250/255, 5/255, 1
                 color:  246/255, 200/255, 0/255, 1
 
@@ -111,46 +117,46 @@
             Button:
                 id: one
                 text: "1"
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Caveat"
+                font_size: 24
                 background_color: 246/255, 250/255, 5/255, 1
                 on_press: root.but_val(1), root.eraseone()
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 id: two
                 text: "2"
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Caveat"
+                font_size: 24
                 background_color: 246/255, 250/255, 5/255, 1
                 on_press: root.but_val(2), root.erasetwo()
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 text: "DEL"
-                font_name: "Comic"
-                font_size: 13
+                font_name: "Caveat"
+                font_size: 15
                 background_color: 246/255, 200/255, 0/255, 1
                 on_press: root.clear()
                 color: 200/255, 250/255, 0/255, 1
             Button:
                 id: three
                 text: "3"
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Caveat"
+                font_size: 24
                 background_color: 246/255, 250/255, 5/255, 1
                 on_press: root.but_val(3), root.erasethree()
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 id: four
                 text: "4"
-                font_name: "Comic"
-                font_size: 15
+                font_name: "Caveat"
+                font_size: 24
                 background_color: 246/255, 250/255, 5/255, 1
                 on_press: root.but_val(4), root.erasefour()
                 color:  246/255, 200/255, 0/255, 1
             Button:
                 text: "SHOP"
-                font_name: "Comic"
-                font_size: 13
+                font_name: "Caveat"
+                font_size: 15
                 background_color: 246/255, 200/255, 0/255, 1
                 color: 200/255, 250/255, 0/255, 1
                 on_release: root.bpop()

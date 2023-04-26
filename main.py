@@ -1,6 +1,8 @@
-# import time
+import time
+from kivy.clock import Clock
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.core.text import LabelBase
 from kivy.properties import StringProperty, NumericProperty, BooleanProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.anchorlayout import AnchorLayout
@@ -75,15 +77,18 @@ class PlayingScreen(Screen):
                 j == f"{1}" or j == f"{2}" or j == f"{3}" or j == f"{4}") and (
                 k == "" or k == "" or k == "" or k == "") and (l == "" or l == "" or l == "" or l == ""):
             self.ids.input_three.text = f"{num}"
-        else:
+        elif(i == f"{1}" or i == f"{2}" or i == f"{3}" or i == f"{4}") and (
+                j == f"{1}" or j == f"{2}" or j == f"{3}" or j == f"{4}") and (
+                k == "1" or k == "2" or k == "3" or k == "4") and (l == "" or l == "" or l == "" or l == ""):
             self.ids.input_four.text = f"{num}"
 
         if self.ids.input_one.text != "" and self.ids.input_two.text != "" and self.ids.input_three.text != "" and self.ids.input_four.text != "":
             correct = f'{self.ids.input_one.text}{self.ids.input_two.text}{self.ids.input_three.text}{self.ids.input_four.text}'
             if answer[self.idx] == correct:
-                self.npop()
+                Clock.schedule_once(lambda dt: self.npop(), 1.1)
             else:
-                self.apop()
+                Clock.schedule_once(lambda dt: self.apop(), 1.1)
+        
 
     def nexting(self):
         self.value += 1
@@ -129,11 +134,12 @@ class PlayingScreen(Screen):
         bpopup.open()
 
     def npop(self):
-        nbox = AnchorLayout()
-        nbtn1 = Button(text="NEXT", size_hint=(.5, .1))
+        nbox = BoxLayout(orientation='vertical')
+        nbtn1 = Button(text="NEXT", size_hint=(.3, 0), font_name="Caveat", font_size='20')
+        nimg = Image(source=imag[self.index], size_hint=(.65, .8))
+        nbox.add_widget(nimg)
         nbox.add_widget(nbtn1)
-        npopup = Popup(title='',
-                       title_align='center', content=nbox, auto_dismiss=False, background='images/one.jpg')
+        npopup = Popup(title='', title_align='center', content=nbox, auto_dismiss=False, background='imags/correct.JPG')
         nbtn1.bind(on_release=npopup.dismiss)
         nbtn1.bind(on_press=lambda _: self.nexting())
 
@@ -141,9 +147,9 @@ class PlayingScreen(Screen):
 
     def apop(self):
         abox = AnchorLayout()
-        abtn1 = Button(text="WRONG", size_hint=(.5, .1))
+        abtn1 = Button(text="TRY AGAIN", size_hint=(.5, .1), font_name="Caveat", font_size='20')
         abox.add_widget(abtn1)
-        apopup = Popup(title='', title_align='center', content=abox, auto_dismiss=False, background='images/one.jpg')
+        apopup = Popup(title='', title_align='center', content=abox, auto_dismiss=False, background='imags/wrong.JPG')
         abtn1.bind(on_release=apopup.dismiss)
         abtn1.bind(on_press=lambda _: self.clear())
         apopup.open()
@@ -172,6 +178,10 @@ class PlayingScreen(Screen):
 
     def opening_level_popup(self):
         self.level_popup()
+
+LabelBase.register(name='Tiltprism', fn_regular='fonts/TiltPrism-Regular-VariableFont_XROT,YROT.ttf')
+LabelBase.register(name='Caveat', fn_regular='fonts/Caveat-VariableFont_wght.ttf')
+LabelBase.register(name='Dyna', fn_regular='fonts/DynaPuff-VariableFont_wdth,wght.ttf')
 
 class Jumbled(MDApp):
     def build(self):
